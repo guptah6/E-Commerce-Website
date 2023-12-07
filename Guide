@@ -1,0 +1,46 @@
+About The Project
+E-commerce website on cloud
+
+Network, Application Diagram and Architecture to host and monitor a e-commerce website on AWS cloud in efficient manner. Services used are chosen in such a way that they will provide maximum throughput along with cost saving. Network Diagram
+
+Built With
+Python
+Flask Framework
+Getting Started
+To get a local copy up and running follow these simple steps.
+
+Prerequisites
+All you need is a AWS account.Building these services and deploying is relatively easy.Ping me if you need help.
+
+AWS account
+Installation
+Description:
+
+We will use M4 type EC2 instance to bear high computation and storage.
+Create a AMI with the instance and assign a Auto Scaling group.
+A Elastic Load Balancer with stickiness enabled to balance the network traffic efficiently.
+For backend database we will use RDS with multiple read replicas to store user data.
+AWS ElastiCache for fast performance and less reads from database using cache.
+We will use aws sns for email,text and other notifications.
+Amazon Cloudwatch for continuous health check and monitoring.
+Aws S3 for Static content and images and thumbnails.
+AWS Route53 for DNS and routing.
+AWS Cloudfront for for fast access to website through edge locations or delivering application.
+Aws cognito for identity check/credential check.
+Moreover we will use web clients for storing cookies and making website stateless.
+Step-wise description:
+
+User will access website and will be directed to route 53.
+Route 53 will direct the traffic towards Cloudfront which serves data or point towards ELB depending upon scenario along with cognito checking identity.
+ELB will direct traffic to EC2 ASG instances.
+Static website data like product images and thumbnails will be served through aws s3.
+ELB sticky session will make sure that user is connected to same instance.
+For database EC2 instance will check Elasticache if it is a cache-hit it will server data or it will look into RDS and cache data.
+Finally the data is served back to customer.
+SNS will help in notification services like order confirmation calls or other notifications (Using lambda function or APIs)
+CloudWatch will help to Monitor.
+Security Perspective:
+
+Tight Security with security groups referencing each other. No instance or Database will be publicly accessible.
+Usage
+Use this architecture to host and monitor a e-commerce website on AWS cloud in efficient manner.
